@@ -30,7 +30,7 @@ Widget build(BuildContext) {
 Next step is to init OverlayNotification class
 
 ```dart
-  final overlayNotification = await OverlayNotification().init(context: context);
+  final overlayNotification = await OverlayNotification()..init(context: context);
 ```
 
 After this specify youre overlay notification events;
