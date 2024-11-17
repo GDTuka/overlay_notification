@@ -40,16 +40,6 @@ class DefaultNotification implements IOverlayNotificationModel {
   Color notificationColor;
 }
 
-class ExampleNotification extends IOverlayNotificationModel {
-  ExampleNotification()
-      : super(
-          animationCompleteCallback: () {},
-          duration: const Duration(seconds: 3),
-          notificationColor: Colors.red,
-          widget: const Text('Example Notification'),
-        );
-}
-
 class OverlayNotification {
   bool _hasInited = false;
 
