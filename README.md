@@ -1,41 +1,40 @@
 ## Features
-
-This package is my variant of overlay notification.
-
-Usage not that simple but i usually use this package
+This package is variant of overlay notifications.
 
 ## Usage
-
-fist pass overlay over all app like this
+First, wrap your entire app with an Overlay by modifying the build method like this:
 
 ```dart
 @override
-Widget build(BuildContext) {
-    return MetiralApp.router(
-        builder: (context,child){
-            return Overlay(
-                initialEntries: [
-                    OverlayEntry(
-                    builder: (context) {
-                        return child;
-                    },
-                   ),
-                ]
-            )
-        }
-    )
+Widget build(BuildContext context) {
+  return MaterialApp.router(
+    builder: (context, child) {
+      return Overlay(
+        initialEntries: [
+          OverlayEntry(
+            builder: (context) {
+              return child;
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
 ```
-
-Next step is to init OverlayNotification class
-
+Next, initialize the OverlayNotification class:
 ```dart
-  final overlayNotification = await OverlayNotification()..init(context: context);
+OverlayNotification().init(context: context);
 ```
 
-After this specify youre overlay notification events;
+OverlayNotification is singlton, no need to pass instance in variable. Just use OverlayNotification()
 
-just extend youre class with IOverlayNotificationModel 
+```dart
+OverlayNotification().showNotification(SomeNotificationModel());
+```
+
+After this, specify your overlay notification events.
+Extend your class with IOverlayNotificationModel
 
 ```dart
 class IOverlayNotificationModel {
@@ -53,7 +52,7 @@ class IOverlayNotificationModel {
 }
 ```
 
-you can do it like this
+You can do it like this:
 
 ```dart
 class ExampleNotification extends IOverlayNotificationModel {
@@ -65,12 +64,19 @@ class ExampleNotification extends IOverlayNotificationModel {
           widget: const Text('Example Notification'),
         );
 }
-```
 
-then use showNotification function in OverlayNotification class to show notification
+```
+Then, use the showNotification function in the OverlayNotification class to display the notification:
+```dart
+overlayNotification.showNotification(ExampleNotification());
+```
+Or use DefaultNotificationWidget and always provide data into it.
 
 ```dart
-overlayNotification.showNotification(ExampleNotification())
+OverlayNotification().showNotification(DefaultNotification(
+  widget: SomeWidget(),
+  animationCompleteCallback:() => someCallback(),
+  duration: Duration(seconds: 3),
+  notificationColor: Colors.white,
+));
 ```
-
-or use DefaultNotificationWidget and always provide data into 
