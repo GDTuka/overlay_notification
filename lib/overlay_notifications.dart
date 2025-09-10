@@ -45,7 +45,7 @@ class DefaultNotification implements IOverlayNotificationModel {
 
 class OverlayNotification {
   // check i class was alrady initd
-  bool _hasInited = false;
+  bool hasInited = false;
 
   // Private constructor
   OverlayNotification._internal();
@@ -81,11 +81,11 @@ class OverlayNotification {
     required BuildContext context,
     Duration duration = const Duration(seconds: 3),
   }) async {
-    if (_hasInited) {
+    if (hasInited) {
       throw Exception('OverlayNotification alrady initialized');
     }
     _duration = duration;
-    _hasInited = true;
+    hasInited = true;
 
     overlayNotificationsController = StreamController<IOverlayNotificationModel>.broadcast();
 
